@@ -20,12 +20,14 @@ def clear_screen():
 
 
 for file in os.listdir(path):
-    file_list.append(file)
+    if file.endswith(".txt") == False:
+        file_list.append(file)
 
 for file in file_list:
-    downloaded_scripts += (
-        f"        - Enter '{file}' to go to {file}'s dedicated page.\n"
-    )
+    if file.endswith(".txt") == False:
+        downloaded_scripts += (
+            f"        - Enter '{file}' to go to {file}'s dedicated page.\n"
+        )
 
 
 def main_loop():
