@@ -1,0 +1,6 @@
+{
+  "language" : "python",
+  "desc" : "Updates your requirements.txt or creates one.",
+  "title" : "Update Requirements",
+  "main_command" : "main_loop_update_requirements"
+}
