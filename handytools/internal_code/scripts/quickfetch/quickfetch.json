@@ -1,0 +1,6 @@
+{
+  "language" : "python",
+  "desc" : "Quickfetch is an easy to use tool to display some info about your device, helpful for solving bugs, that works out of the box.",
+  "title" : "Quickfetch",
+  "main_command" : "main_loop_quickfetch"
+}

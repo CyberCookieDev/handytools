@@ -1,0 +1,6 @@
+{
+  "language" : "python",
+  "desc" : "File Sorter is a small python project made to help you with file organisation.",
+  "title" : "File Sorter",
+  "main_command" : "main_loop_filesorter"
+}
