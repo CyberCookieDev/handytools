@@ -1,0 +1,10 @@
+{
+  "sys_name": true,
+  "python_data": true,
+  "processor": true,
+  "memory_data": true,
+  "disk_data": true,
+  "uptime": true,
+  "basic_network": true,
+  "res": true
+}

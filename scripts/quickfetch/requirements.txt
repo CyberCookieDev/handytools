@@ -1,0 +1,7 @@
+colorama
+datetime
+json
+platform
+psutil
+screeninfo
+socket

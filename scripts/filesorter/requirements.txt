@@ -1,0 +1,7 @@
+colorama
+os
+pathlib
+re
+rich
+send2trash
+shutil

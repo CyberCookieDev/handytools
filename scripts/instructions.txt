@@ -1,0 +1,18 @@
+
+IMPORTANT: The main command of your script MUST be named main()!
+
+Directory Structure:
+
+your_project_name/
+    ├── your_project_name.json
+    └── your_project_name.py
+
+    your_project_name.py:
+        This is the main script file where your core functionality resides. Place the main code here.
+    your_project_name.json:
+        This configuration file provides essential details about your project. Below is the structure you should follow for the .json file:
+
+{
+    "desc": "A brief description of what your project does. This can include features or use cases.",
+    "title": "The name or title of your project, e.g., My Script Tool",
+}
