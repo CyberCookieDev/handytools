@@ -1,11 +1,12 @@
 
-IMPORTANT: The main command of your script MUST be named main()!
+IMPORTANT: The main command of your script MUST be "main()"!
 
 Directory Structure:
 
 your_project_name/
     ├── your_project_name.json
-    └── your_project_name.py
+    ├── your_project_name.py
+    └── Other files from your project.
 
     your_project_name.py:
         This is the main script file where your core functionality resides. Place the main code here.
@@ -13,6 +14,10 @@ your_project_name/
         This configuration file provides essential details about your project. Below is the structure you should follow for the .json file:
 
 {
-    "desc": "A brief description of what your project does. This can include features or use cases.",
+    "desc": "A brief description of what your project does, will be displayed on the script's main page. This can include features or use cases.",
     "title": "The name or title of your project, e.g., My Script Tool",
 }
+    Other files that your project is dependent on, license, etc.
+
+# Currently unavailible, but applies if you download from GitHub. If you use the import from GitHub function, please ensure that the repository you copy meets this standard.
+It does not have to be in a single folder, it can be just the your_project.json, your_project.py and other files.
