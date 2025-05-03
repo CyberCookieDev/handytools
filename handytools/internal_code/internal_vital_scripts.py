@@ -2,8 +2,9 @@ import os
 import black
 
 
+# Quick and easy code to find imports in a file without using any external libraries.
 def find_imports_in_file(file_path):
-    
+
     external_modules = []
 
     try:
@@ -26,6 +27,7 @@ def find_imports_in_file(file_path):
     return external_modules
 
 
+# Formats the code using black.
 def format_file(file_path):
     mode = black.FileMode()
     try:
@@ -44,7 +46,8 @@ def format_file(file_path):
 
 
 def generate_requirements(directory, filename):
-    """Generate requirements.txt based on imports in Python files."""
+    # Generate requirements.txt based on imports in Python files.
+
     modules = set()  # Use a set to avoid duplicates
 
     # Traverse the directory and subdirectories
