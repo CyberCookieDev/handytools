@@ -15,6 +15,8 @@ import psutil
 import time
 import send2trash
 
+""" On a side note, this file is the one I, documenting the code long after writing it (which is a mistake by the way),
+have the most problem documenting, so there might be mistakes, or not so clear moments."""
 
 license = f"""
     Copyright {datetime.date.year} <COPYRIGHT HOLDER>
@@ -25,10 +27,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+
 path = "../../scripts"
 downloaded_scripts = ""
 file_list = []
 home_path = Path.home()
+
+# Loads a module given a path.
 
 
 def load_module_from_path(path, module_name):
@@ -43,6 +48,7 @@ def load_module_from_path(path, module_name):
 with open("settings.json", "r") as f:
     settings = json.load(f)
 
+# Checks for developer mode and if it is enabled, displays additional options
 if settings["dev_mode"] == "true":
     dev_options = (
         ""
@@ -57,10 +63,17 @@ else:
     dev_options = ""
 
 
+# opens files requirements.txt
 def view_dependencies(filename):
     try:
         with open(f"../../scripts/{filename}/requirements.txt") as f:
-            print(f.read())
+            print("")
+            print("Dependencies:")
+            lines = f.read().splitlines()
+            for x in lines:
+                print(f"    - {x}")
+            print("")
+
     except:
         print("Requirements are unavailible for this script.")
         x = input("Do you want to generate requirements? [y/n]:  ")
@@ -72,6 +85,7 @@ def view_dependencies(filename):
             pass
 
 
+# Uses a bunch of functions to make the code better, like appending a license., generating requirements and formatting.
 def improve_code(filename):
     try:
         with open(f"../../scripts/{filename}/requirements.txt") as f:
@@ -93,8 +107,13 @@ def improve_code(filename):
             f.write(license)
 
 
+# The big script running menu
 def run_outside_script(filename):
+
+    # Tries to load data about a project, if not available, displays placeholders.
+
     try:
+
         file = open(f"../../scripts/{filename}/{filename}.json", "r")
         loaded_data = json.load(file)
         print(
@@ -108,13 +127,16 @@ def run_outside_script(filename):
             + "\n"
             + "- Enter 'run' to run the script"
             + "\n"
-            + "- Enter 'exit' to go back to main page."
+            + "- Enter 'exit' to exit."
             + "\n"
             + "- Enter 'delete' to delete."
             + dev_options
         )
+
     except Exception as e:
+
         print(e)
+
         print(
             f"{filename}"
             + "\n"
@@ -122,24 +144,32 @@ def run_outside_script(filename):
             + f'Filesize: {os.path.getsize(f"../../scripts/{filename}/{filename}.py")}\n'
             + """
             - Enter 'run' to run the script.
-            - Enter 'exit' to go back to main page.
+            - Enter 'exit' to exit.
             - Enter 'delete' to delete.
             """
-            +"\n"
+            + "\n"
             + dev_options
         )
     u_input = input("Enter one of the commands above: ")
+
+    # Validity checks
+
     while u_input not in ["run", "exit", "view", "dependencies", "scan", "delete"]:
         u_input = input("Enter one of the commands above: ")
+
     if u_input == "exit":
         sys.exit()
+
     elif u_input == "run":
 
         module_path = os.path.join("../../scripts", filename, filename + ".py")
 
         if os.path.exists(module_path):
 
+            # Tries to run using importlib.
+
             try:
+
                 # Load the module dynamically
                 spec = importlib.util.spec_from_file_location(filename, module_path)
                 module = importlib.util.module_from_spec(spec)
@@ -147,6 +177,7 @@ def run_outside_script(filename):
 
                 # Get the 'main' function and execute
                 if hasattr(module, "main") and callable(module.main):
+
                     print(f"Running script: {filename}")
 
                     start_time = time.time()
@@ -159,27 +190,36 @@ def run_outside_script(filename):
 
                     print(f"Execution completed in {end_time - start_time:.2f} seconds")
                     print(f"Average CPU usage: {(cpu_start + cpu_end) / 2:.2f}%")
+
                 else:
-                    print(f"The script '{filename}' does not have a callable 'main()' function.")
+
+                    print(
+                        f"The script '{filename}' does not have a callable 'main()' function."
+                    )
+
             except Exception as e:
                 print(f"Error running script '{filename}': {e}")
-
 
         else:
             print(f"Module '{filename}' not found at {module_path}.")
 
     elif u_input == "view":
+        # View the code.
         with open(f"../../scripts/{filename}/{filename}.py", "r") as file:
             code = file.read()
             highlighted_code = highlight(code, PythonLexer(), TerminalFormatter())
             print(highlighted_code)
         run_outside_script(filename)
+
     elif u_input == "dependencies":
+        # Just shows dependencies.
         view_dependencies(filename)
         run_outside_script(filename)
+
     elif u_input == "scan":
         improve_code(filename)
         run_outside_script(filename)
-    elif u_input == "delete":
-        send2trash.send2trash(f"../../scripts/{filename}")
 
+    elif u_input == "delete":
+        # Deletes (sends to trash) the script folder.
+        send2trash.send2trash(f"../../scripts/{filename}")
