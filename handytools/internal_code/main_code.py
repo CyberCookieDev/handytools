@@ -148,8 +148,19 @@ def main_loop():
     while to_continue:
         clear_screen()
         menu_text = (
-            frg.LIGHTGREEN_EX
-            + "HandyTools\n"
+            frg.BLUE
+            + """
+
+  _    _                 _    _______          _     
+ | |  | |               | |  |__   __|        | |    
+ | |__| | __ _ _ __   __| |_   _| | ___   ___ | |___ 
+ |  __  |/ _` | '_ \ / _` | | | | |/ _ \ / _ \| / __|
+ | |  | | (_| | | | | (_| | |_| | | (_) | (_) | \__ |
+ |_|  |_|\__,_|_| |_|\__,_|\__, |_|\___/ \___/|_|___/
+                            __/ |                    
+                           |___/                     
+
+"""
             + frg.WHITE
             + """
             Welcome to HandyTools, your script toolbox with many useful utility programs!
